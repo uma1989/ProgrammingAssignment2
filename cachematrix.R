@@ -39,12 +39,23 @@ cacheSolve <- function(specialmatrix, ...) {
   ## specialmatrix should be "makeCacheMatrix(x)"
   
   i <- specialmatrix$getinv()
+  ## Sets the value of the inverse matrix to the value stored 
+  ## in the "getinv" function of the specialmatrix
   if(!is.null(i)) {
+    ## If there is a non-zero Cached value stored in the 
+    ## "getinv", the cached matrix data will be retrieved and returned
     message("Retrieving the cached matrix data")
     return(i)
   }
   data <- specialmatrix$get()
+    ## The matrix for which the inverse is required is obtained
+    ## from the "get" function of the specialmatrix
   i <- solve(data, ...)
+    ## The value of the inverse matrix is computed using 
+    ## "data" and the solve function
   specialmatrix$setinv(i)
+    ## The inverse matrix is cached using the "setinv" function
+    ## of the specialmatrix
   i
+    ## The value of the inverse matrix is returned
 }
